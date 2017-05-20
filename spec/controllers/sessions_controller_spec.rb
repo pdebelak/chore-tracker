@@ -7,7 +7,7 @@ describe SessionsController do
       allow(User).to receive(:from_omniauth).and_return user
       request.env["omniauth.auth"] = "auth"
       get :create, params: { provider: "google_oauth2" }
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to lists_path
       expect(session[:user_id]).to eq user.id
       expect(User).to have_received(:from_omniauth).with "auth"
       expect(flash[:success]).to be_present

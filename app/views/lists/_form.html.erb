@@ -1,0 +1,22 @@
+<%= form_for list do |f| %>
+  <%= f.label :name, class: "label" %>
+  <div class="field has-addons">
+    <p class="control">
+      <% if list.errors[:name].present? %>
+        <%= f.text_field :name, class: "input is-danger" %>
+      <% else %>
+        <%= f.text_field :name, class: "input" %>
+      <% end %>
+    </p>
+    <p class="control">
+    <%= f.submit nil, class: "button is-primary" %>
+    </p>
+  </div>
+    <% if list.errors[:name].present? %>
+      <p class="help is-danger"><%= list.errors.full_message :name, list.errors[:name].first %></p>
+    <% end %>
+<% end %>
+
+<hr>
+
+<p><%= link_to "Cancel", lists_path %></p>

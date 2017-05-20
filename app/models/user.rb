@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  has_many :users_lists
+  has_many :lists, through: :users_lists
+
+  validates :email, presence: true
+  validates :name, presence: true
+
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize.tap do |user|
       user.name = auth.info.name
