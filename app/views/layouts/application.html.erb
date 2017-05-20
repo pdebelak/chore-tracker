@@ -9,6 +9,23 @@
   </head>
 
   <body>
+    <% if flash[:success].present? %>
+      <div class="notification is-success global-notification">
+        <button class="delete"></button>
+        <div class="container">
+          <%= flash[:success] %>
+        </div>
+      </div>
+    <% end %>
+    <% if flash[:error].present? %>
+      <div class="notification is-danger global-notification">
+        <button class="delete"></button>
+        <div class="container">
+          <%= flash[:error] %>
+        </div>
+      </div>
+    <% end %>
+
     <header class="hero">
       <div class="container">
         <nav class="nav">
