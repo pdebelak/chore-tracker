@@ -9,4 +9,15 @@ class ApplicationController < ActionController::Base
   def signed_in?
     current_user.present?
   end
+
+  def self.require_user(*args)
+    before_action :require_user, *args
+  end
+
+  def require_user
+    unless signed_in?
+      flash[:error] = "You must sign in to do that"
+      redirect_to root_path
+    end
+  end
 end
