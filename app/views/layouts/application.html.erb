@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ChoreTracker</title>
+    <title>Chore Tracker</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="hero">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-left">
+            <%= nav_item :a, href: root_path do %>
+              <h1 class="title">Chore Tracker</h1>
+            <% end %>
+          </div>
+          <div class="nav-right">
+            <% if signed_in? %>
+              <%= nav_item do %>
+                <%= image_tag current_user.image_url %>
+                &nbsp;
+                <%= current_user.name %>
+              <% end %>
+              <%= nav_item do %>
+                <%= button_to "Sign out", signout_path, method: :delete, class: "button" %>
+              <% end %>
+            <% else %>
+              <%= nav_item do %>
+                <%= button_to "Sign in with Google", "/auth/google_oauth2", class: "button" %>
+              <% end %>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="section">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
