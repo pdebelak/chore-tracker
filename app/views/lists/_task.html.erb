@@ -1,0 +1,16 @@
+<% TaskDecorator.new(task).tap do |decorated_task| %>
+  <tr class="task <%= decorated_task.task_class %>">
+    <td><%= task.description %></td>
+    <td><%= decorated_task.schedule_explanation %></td>
+    <td><%= decorated_task.last_completed %></td>
+    <td>
+      <div class="is-pulled-right">
+        <%= link_to "Delete", list_task_path(list, task), class: "button is-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+        &nbsp;
+        <%= link_to "Edit", edit_list_task_path(list, task), class: "button" %>
+        &nbsp;
+        <%= link_to "Complete", complete_list_task_path(list, task), method: :patch, class: "button is-primary" %>
+      </div>
+    </td>
+  </tr>
+<% end %>

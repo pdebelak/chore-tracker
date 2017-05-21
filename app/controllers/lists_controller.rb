@@ -7,6 +7,7 @@ class ListsController < ApplicationController
 
   def show
     @list = find_list
+    @grouped_tasks = @list.task_with_completions.grouped_by_completion
   end
 
   def new

@@ -3,3 +3,7 @@
 .global-notification {
   border-radius: 0;
 }
+
+.task.completed {
+  background-color: rgba($primary, 0.2);
+}

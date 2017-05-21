@@ -10,6 +10,11 @@ FactoryGirl.define do
     users { build_list :user, 1 }
   end
 
+  factory :completion do
+    user
+    task
+  end
+
   factory :task do
     description { Faker::Commerce.product_name }
     schedule Task::WEEKLY

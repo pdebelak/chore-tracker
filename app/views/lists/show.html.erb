@@ -7,18 +7,8 @@
     <th>Last completed</th>
     <th></th>
   </tr>
-  <% @list.task_with_completions.each do |task| %>
-    <tr>
-      <td><%= link_to task.description, list_task_path(@list, task) %></td>
-      <td><%= task.schedule %></td>
-      <td><%= TaskDecorator.new(task).last_completed %></td>
-      <td>
-        <div class="is-pulled-right">
-          <%= link_to "Complete", complete_list_task_path(@list, task), method: :patch, class: "button" %>
-        </div>
-      </td>
-    </tr>
-  <% end %>
+  <%= render partial: "task", collection: @grouped_tasks.not_completed, as: :task, locals: { list: @list } %>
+  <%= render partial: "task", collection: @grouped_tasks.completed, as: :task, locals: { list: @list } %>
 </table>
 
 <p><%= link_to "Add a task", new_list_task_path(@list) %></p>
