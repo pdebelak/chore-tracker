@@ -9,12 +9,28 @@
       <% end %>
     </p>
     <p class="control">
-    <%= f.submit nil, class: "button is-primary" %>
+      <%= f.submit nil, class: "button is-primary" %>
     </p>
   </div>
     <% if list.errors[:name].present? %>
       <p class="help is-danger"><%= list.errors.full_message :name, list.errors[:name].first %></p>
     <% end %>
+<% end %>
+
+<% if list.persisted? %>
+  <br>
+  <h2 class="subtitle">Add another person</h2>
+  <%= form_tag add_user_list_path(list), method: :patch do %>
+    <%= label_tag "list[user_email", "Email", class: "label" %>
+    <div class="field has-addons">
+      <p class="control">
+      <%= text_field_tag "list[user_email]", params.fetch(:list, {})[:email], class: "input", type: "email" %>
+      </p>
+      <p class="control">
+        <%= submit_tag "Add person", class: "button is-primary" %>
+      </p>
+    </div>
+  <% end %>
 <% end %>
 
 <hr>

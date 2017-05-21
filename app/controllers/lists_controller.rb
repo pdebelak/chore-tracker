@@ -8,6 +8,7 @@ class ListsController < ApplicationController
   def show
     @list = find_list
     @grouped_tasks = @list.task_with_completions.grouped_by_completion
+    @users = @list.users.except_user(current_user)
   end
 
   def new
@@ -17,7 +18,7 @@ class ListsController < ApplicationController
   def create
     @list = current_user.lists.create list_params
     if @list.valid?
-      redirect_to lists_path
+      redirect_to list_path(@list)
     else
       render :new
     end
@@ -30,7 +31,8 @@ class ListsController < ApplicationController
   def update
     @list = find_list
     if @list.update list_params
-      redirect_to lists_path
+      flash[:success] = "List updated"
+      redirect_to list_path(@list)
     else
       render :edit
     end
@@ -38,7 +40,21 @@ class ListsController < ApplicationController
 
   def destroy
     find_list.destroy!
+    flash[:success] = "List deleted"
     redirect_to lists_path
+  end
+
+  def add_user
+    @list = find_list
+    user = User.find_by email: params[:list][:user_email]
+    if user.present?
+      @list.add_user! user
+      flash[:success] = "That person was added to the list!"
+      redirect_to list_path(@list)
+    else
+      flash.now[:error] = "That person could not be found."
+      render :edit
+    end
   end
 
   private

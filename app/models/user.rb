@@ -13,4 +13,8 @@ class User < ApplicationRecord
       user.save!
     end
   end
+
+  def self.except_user(user)
+    where.not(id: user.id)
+  end
 end
