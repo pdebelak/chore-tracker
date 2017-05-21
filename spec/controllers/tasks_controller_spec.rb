@@ -70,4 +70,17 @@ describe TasksController do
       expect { Task.find task.id }.to raise_error ActiveRecord::RecordNotFound
     end
   end
+
+  describe "#complete" do
+    let(:list) { create :list, users: [user] }
+    let(:task) { create :task, list: list }
+
+    it "completes the task" do
+      patch :complete, params: { list_id: list.id, id: task.id }
+      completion = Completion.last
+      expect(completion.user).to eq user
+      expect(completion.task).to eq task
+      expect(response).to redirect_to list_path(list)
+    end
+  end
 end

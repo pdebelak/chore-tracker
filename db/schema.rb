@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520194953) do
+ActiveRecord::Schema.define(version: 20170521034249) do
+
+  create_table "completions", force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_completions_on_task_id"
+    t.index ["user_id"], name: "index_completions_on_user_id"
+  end
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
@@ -42,5 +51,18 @@ ActiveRecord::Schema.define(version: 20170520194953) do
     t.index ["list_id"], name: "index_users_lists_on_list_id"
     t.index ["user_id"], name: "index_users_lists_on_user_id"
   end
+
+
+  create_view "task_with_completions",  sql_definition: <<-SQL
+      SELECT tasks.*,
+         completions.created_at as last_completed_at
+  FROM tasks
+  LEFT OUTER JOIN completions
+    ON tasks.id = completions.task_id
+  LEFT OUTER JOIN completions cmpl
+    ON completions.task_id = cmpl.task_id
+    AND completions.created_at < cmpl.created_at
+  WHERE cmpl.id IS NULL
+  SQL
 
 end

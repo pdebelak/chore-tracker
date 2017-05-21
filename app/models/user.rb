@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :users_lists
   has_many :lists, through: :users_lists
+  has_many :completions
 
   validates :email, presence: true
   validates :name, presence: true

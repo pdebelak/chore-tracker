@@ -32,6 +32,9 @@ gem "turbolinks", "~> 5"
 gem "omniauth-google-oauth2"
 gem "bulma-rails"
 
+gem "scenic"
+gem "scenic_sqlite_adapter", git: "git://github.com/pdebelak/scenic_sqlite_adapter.git"
+
 group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", "~> 2.13"

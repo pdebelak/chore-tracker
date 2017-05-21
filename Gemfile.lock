@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/pdebelak/scenic_sqlite_adapter.git
+  revision: 0941a2347b7e2fa25175c139ac1d2dce1687d4d1
+  specs:
+    scenic_sqlite_adapter (0.1.0)
+      activerecord (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -181,6 +188,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    scenic (1.4.0)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     selenium-webdriver (3.4.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
@@ -238,6 +248,8 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   sass-rails (~> 5.0)
+  scenic
+  scenic_sqlite_adapter!
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
