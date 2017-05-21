@@ -1,0 +1,31 @@
+<%= form_for [task.list, task] do |f| %>
+  <div class="field">
+    <%= f.label :description, class: "label" %>
+    <p class="control">
+      <% if task.errors[:description].present? %>
+        <%= f.text_field :description, class: "input is-danger" %>
+        <p class="help is-danger"><%= task.errors.full_message :description, task.errors[:description].first %></p>
+      <% else %>
+        <%= f.text_field :description, class: "input" %>
+      <% end %>
+    </p>
+  </div>
+  <div class="field">
+    <%= f.label :schedule, class: "label" %>
+    <p class="control">
+      <span class="select">
+        <% if task.errors[:schedule].present? %>
+          <%= f.select :schedule, TaskDecorator.schedule_options, class: "input is-danger" %>
+          <p class="help is-danger"><%= task.errors.full_message :schedule, task.errors[:schedule].first %></p>
+        <% else %>
+          <%= f.select :schedule, TaskDecorator.schedule_options, class: "input" %>
+        <% end %>
+      </span>
+    </p>
+  </div>
+  <%= f.submit nil, class: "button is-primary" %>
+<% end %>
+
+<hr>
+
+<p><%= link_to "Cancel", list_path(task.list) %></p>
