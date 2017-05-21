@@ -1,0 +1,16 @@
+<h2 class="subtitle">Task details</h2>
+
+<% TaskDecorator.new(@task).tap do |task| %>
+  <p><strong>Description:</strong> <%= task.description %></p>
+  <p><strong>Schedule:</strong><%= task.schedule_explanation %></p>
+<% end %>
+
+<hr>
+
+<p>
+  <%= link_to "Edit", edit_list_task_path(@task.list, @task), class: "button" %>
+  &nbsp;
+  <%= link_to "Delete", list_task_path(@task.list, @task), class: "button is-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+</p>
+<br>
+<p><%= link_to "Back to #{@task.list.name}", list_path(@task.list) %></p>

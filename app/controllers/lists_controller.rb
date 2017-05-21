@@ -14,7 +14,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = current_user.lists.create(list_params)
+    @list = current_user.lists.create list_params
     if @list.valid?
       redirect_to lists_path
     else
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
 
   def update
     @list = find_list
-    if @list.update(list_params)
+    if @list.update list_params
       redirect_to lists_path
     else
       render :edit
@@ -43,10 +43,10 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit :name
   end
 
   def find_list
-    current_user.lists.find(params[:id])
+    current_user.lists.find params[:id]
   end
 end

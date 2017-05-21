@@ -45,7 +45,7 @@ describe ListsController do
       it "redirects to root path" do
         create_list
         expect(response).to redirect_to root_path
-        expect(List).not_to be_any
+        expect(List.all).to be_empty
       end
     end
 
@@ -67,7 +67,7 @@ describe ListsController do
           session[:user_id] = user.id
           post :create, params: { list: { name: "" } }
           expect(response).to be_ok
-          expect(List).not_to be_any
+          expect(List.all).to be_empty
         end
       end
     end
