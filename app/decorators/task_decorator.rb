@@ -21,6 +21,10 @@ class TaskDecorator
     last_completed_at&.to_date
   end
 
+  def task_class
+    "completed" if task.complete?
+  end
+
   private
 
   attr_reader :task

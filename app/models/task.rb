@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  include Schedulable
+
   SCHEDULES = [
     WEEKLY = "weekly".freeze,
     MONTHLY = "monthly".freeze,
@@ -12,14 +14,6 @@ class Task < ApplicationRecord
 
   def self.schedules
     SCHEDULES
-  end
-
-  def weekly?
-    schedule == WEEKLY
-  end
-
-  def monthly?
-    schedule == MONTHLY
   end
 
   def complete!(user)

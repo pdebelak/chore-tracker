@@ -14,10 +14,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
-    @task = list.task_with_completions.find params[:id]
-  end
-
   def edit
     @task = find_task
   end
