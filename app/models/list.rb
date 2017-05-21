@@ -5,4 +5,8 @@ class List < ApplicationRecord
   has_many :task_with_completions
 
   validates :name, presence: true
+
+  def add_user!(user)
+    users << user
+  end
 end

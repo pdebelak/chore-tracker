@@ -54,8 +54,8 @@ describe ListsController do
         user = create :user
         session[:user_id] = user.id
         create_list
-        expect(response).to redirect_to lists_path
         list = List.first
+        expect(response).to redirect_to list_path(list)
         expect(list.name).to eq "List name"
         expect(list.users).to include user
         expect(user.lists).to include list
@@ -87,8 +87,9 @@ describe ListsController do
 
       it "updates the list" do
         update_list
-        expect(response).to redirect_to lists_path
+        expect(response).to redirect_to list_path(list)
         expect(list.reload.name).to eq "New name"
+        expect(flash[:success]).to be_present
       end
 
       context "but the list could not be updated" do
@@ -117,6 +118,30 @@ describe ListsController do
       delete :destroy, params: { id: list.id }
       expect(response).to redirect_to lists_path
       expect { List.find(list.id) }.to raise_error ActiveRecord::RecordNotFound
+      expect(flash[:success]).to be_present
+    end
+  end
+
+  describe "#add_user" do
+    let(:user) { create :user }
+    let(:list) { create:list, users: [user] }
+    before { session[:user_id] = user.id }
+
+    it "adds the user" do
+      other_user = create :user
+      patch :add_user, params: { id: list.id, list: { user_email: other_user.email } }
+      expect(response).to redirect_to list_path(list)
+      expect(list.reload.users).to match_array [user, other_user]
+      expect(flash[:success]).to be_present
+    end
+
+    context "when the user is not found" do
+      it "shows an error" do
+        patch :add_user, params: { id: list.id, list: { user_email: "madeup@email.com" } }
+        expect(response).to be_ok
+        expect(list.reload.users).to eq [user]
+        expect(flash[:error]).to be_present
+      end
     end
   end
 end

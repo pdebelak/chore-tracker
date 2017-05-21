@@ -28,6 +28,7 @@ describe TasksController do
         expect(task.description).to eq "A task"
         expect(task).to be_weekly
         expect(task.list).to eq list
+        expect(flash[:success]).to be_present
       end
 
       context "and task is invalid" do
@@ -50,6 +51,7 @@ describe TasksController do
       task.reload
       expect(task.description).to eq "New description"
       expect(task).to be_monthly
+      expect(flash[:success]).to be_present
     end
 
     context "with invalid params" do
@@ -68,6 +70,7 @@ describe TasksController do
       delete :destroy, params: { list_id: list.id, id: task.id }
       expect(response).to redirect_to list_path(list)
       expect { Task.find task.id }.to raise_error ActiveRecord::RecordNotFound
+      expect(flash[:success]).to be_present
     end
   end
 

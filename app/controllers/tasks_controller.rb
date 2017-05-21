@@ -8,6 +8,7 @@ class TasksController < ApplicationController
   def create
     @task = list.tasks.create task_params
     if @task.valid?
+      flash[:success] = "Task created"
       redirect_to list_path list
     else
       render :new
@@ -21,6 +22,7 @@ class TasksController < ApplicationController
   def update
     @task = find_task
     if @task.update task_params
+      flash[:success] = "Task updated"
       redirect_to list_path(list)
     else
       render :edit
@@ -29,6 +31,7 @@ class TasksController < ApplicationController
 
   def destroy
     find_task.destroy!
+    flash[:success] = "Task deleted"
     redirect_to list_path(list)
   end
 
