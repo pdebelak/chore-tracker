@@ -5,6 +5,7 @@ class Task < ApplicationRecord
   ]
 
   belongs_to :list
+  has_many :completions
 
   validates :description, presence: true
   validates :schedule, presence: true, inclusion: { in: SCHEDULES }
@@ -19,5 +20,9 @@ class Task < ApplicationRecord
 
   def monthly?
     schedule == MONTHLY
+  end
+
+  def complete!(user)
+    completions.create! user: user
   end
 end

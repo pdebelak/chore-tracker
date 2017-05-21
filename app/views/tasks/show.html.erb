@@ -3,6 +3,7 @@
 <% TaskDecorator.new(@task).tap do |task| %>
   <p><strong>Description:</strong> <%= task.description %></p>
   <p><strong>Schedule:</strong><%= task.schedule_explanation %></p>
+  <p><strong>Last completed:</strong><%= task.last_completed %></p>
 <% end %>
 
 <hr>

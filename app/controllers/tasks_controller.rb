@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = find_task
+    @task = list.task_with_completions.find params[:id]
   end
 
   def edit
@@ -33,6 +33,11 @@ class TasksController < ApplicationController
 
   def destroy
     find_task.destroy!
+    redirect_to list_path(list)
+  end
+
+  def complete
+    find_task.complete! current_user
     redirect_to list_path(list)
   end
 

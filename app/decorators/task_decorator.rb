@@ -3,7 +3,7 @@ class TaskDecorator
     Task.schedules.map { |schedule| [schedule.capitalize, schedule] }
   end
 
-  delegate :weekly?, :monthly?, :description, to: :task
+  delegate :weekly?, :monthly?, :description, :last_completed_at, to: :task
 
   def initialize(task)
     @task = task
@@ -15,6 +15,10 @@ class TaskDecorator
     elsif monthly?
       "Every month"
     end
+  end
+
+  def last_completed
+    last_completed_at&.to_date
   end
 
   private
