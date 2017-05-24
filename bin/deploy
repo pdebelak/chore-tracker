@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+bundle
+./bin/rails assets:precompile
+./bin/rails db:migrate
+./bin/rails restart
