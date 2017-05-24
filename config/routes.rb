@@ -8,10 +8,8 @@ Rails.application.routes.draw do
       patch :add_user
     end
 
-    resources :tasks, except: [:index, :show] do
-      member do
-        patch :complete
-      end
+    resources :tasks, except: [:index] do
+      resources :completions, only: [:create, :destroy]
     end
   end
 

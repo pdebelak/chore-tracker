@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521034249) do
+ActiveRecord::Schema.define(version: 20170524114950) do
 
   create_table "completions", force: :cascade do |t|
     t.integer "task_id"
@@ -55,7 +55,8 @@ ActiveRecord::Schema.define(version: 20170521034249) do
 
   create_view "task_with_completions",  sql_definition: <<-SQL
       SELECT tasks.*,
-         completions.created_at as last_completed_at
+         completions.created_at as last_completed_at,
+         completions.id as completion_id
   FROM tasks
   LEFT OUTER JOIN completions
     ON tasks.id = completions.task_id

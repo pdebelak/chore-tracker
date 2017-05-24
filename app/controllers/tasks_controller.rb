@@ -1,6 +1,11 @@
 class TasksController < ApplicationController
   require_user
 
+  def show
+    @list = list
+    @task = list.task_with_completions.find params[:id]
+  end
+
   def new
     @task = list.tasks.new
   end
@@ -32,11 +37,6 @@ class TasksController < ApplicationController
   def destroy
     find_task.destroy!
     flash[:success] = "Task deleted"
-    redirect_to list_path(list)
-  end
-
-  def complete
-    find_task.complete! current_user
     redirect_to list_path(list)
   end
 
