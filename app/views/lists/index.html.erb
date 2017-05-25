@@ -1,19 +1,24 @@
 <h2 class="subtitle">Your Lists</h2>
 
-<table class="table">
-  <% @lists.each do |list| %>
-    <tr>
-      <td><%= link_to list.name, list_path(list) %></td>
-      <td>
-        <div class="is-pulled-right">
+<% @lists.each do |list| %>
+  <section class="box">
+    <div class="columns is-mobile">
+      <div class="column">
+        <%= link_to list.name, list_path(list) %>
+      </div>
+      <div class="column list__actions">
+        <div>
+          &nbsp;
           <%= link_to "Edit", edit_list_path(list), class: "button" %>
           &nbsp;
+        </div>
+        <div>
           <%= link_to "Delete", list_path(list), class: "button is-danger", method: :delete, data: { confirm: "Are you sure?" } %>
         </div>
-      </td>
-    </tr>
-  <% end %>
-</table>
+      </div>
+    </div>
+  </section>
+<% end %>
 
 <hr>
 

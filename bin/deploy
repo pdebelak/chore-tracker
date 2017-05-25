@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 bundle
+./bin/rake tmp:clear
 ./bin/rails assets:precompile
 ./bin/rails db:migrate
 ./bin/rails restart

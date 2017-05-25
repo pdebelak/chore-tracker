@@ -6,15 +6,7 @@
   <br>
 <% end %>
 
-<table class="table">
-  <tr>
-    <th>Description</th>
-    <th>Schedule</th>
-    <th>Last completed</th>
-    <th></th>
-  </tr>
-  <%= render partial: "task", collection: @grouped_tasks.not_completed, as: :task, locals: { list: @list } %>
-  <%= render partial: "task", collection: @grouped_tasks.completed, as: :task, locals: { list: @list } %>
-</table>
+<%= render partial: "task", collection: @grouped_tasks.not_completed, as: :task, locals: { list: @list } %>
+<%= render partial: "task", collection: @grouped_tasks.completed, as: :task, locals: { list: @list } %>
 
 <p><%= link_to "Add a task", new_list_task_path(@list) %></p>

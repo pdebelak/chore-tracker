@@ -4,11 +4,25 @@
   border-radius: 0;
 }
 
-.task {
-  a {
-    color: $text;
+.task__link {
+  color: $text;
+}
+
+.task--completed {
+  background-color: rgba($primary, 0.2);
+}
+
+.task__actions {
+  display: flex;
+  flex: none;
+  @media (min-width: $tablet) {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    flex-basis: 300px;
   }
-  &.completed {
-    background-color: rgba($primary, 0.2);
-  }
+}
+
+.list__actions {
+  display: flex;
+  justify-content: flex-end;
 }
