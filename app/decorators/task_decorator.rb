@@ -22,7 +22,7 @@ class TaskDecorator
   end
 
   def task_class
-    "completed" if task.complete?
+    "task--completed" if task.complete?
   end
 
   private
