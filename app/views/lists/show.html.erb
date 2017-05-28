@@ -6,7 +6,8 @@
   <br>
 <% end %>
 
-<%= render partial: "task", collection: @grouped_tasks.not_completed, as: :task, locals: { list: @list } %>
-<%= render partial: "task", collection: @grouped_tasks.completed, as: :task, locals: { list: @list } %>
+<div id="tasks">
+  <%= render "tasks", grouped_tasks: @grouped_tasks, list: @list %>
+</div>
 
 <p><%= link_to "Add a task", new_list_task_path(@list) %></p>

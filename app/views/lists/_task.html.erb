@@ -20,12 +20,12 @@
       </div>
       <div class="column task__actions">
         <div>
-          <%= link_to "Complete", list_task_completions_path(list, task), method: :post, class: "button is-primary" %>
+          <%= link_to "Complete", list_task_completions_path(list, task), method: :post, class: "button is-primary", remote: true %>
         </div>
         <% if task.complete? %>
           <div>
             &nbsp;
-            <%= link_to "Undo complete", list_task_completion_path(list, task, task.completion_id), class: "button is-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+            <%= link_to "Undo complete", list_task_completion_path(list, task, task.completion_id), class: "button is-danger", method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
             &nbsp;
           </div>
         <% end %>

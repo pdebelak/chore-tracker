@@ -1,0 +1,2 @@
+<%= render partial: "lists/task", collection: grouped_tasks.not_completed, as: :task, locals: { list: list } %>
+<%= render partial: "lists/task", collection: grouped_tasks.completed, as: :task, locals: { list: list } %>

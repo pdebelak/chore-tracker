@@ -3,12 +3,26 @@ class CompletionsController < ApplicationController
 
   def create
     task.complete! current_user
-    redirect_to list_path task.list
+    respond_to do |format|
+      format.html { redirect_to list_path task.list }
+      format.js do
+        @list = task.list
+        @grouped_tasks = @list.task_with_completions.grouped_by_completion
+        render :refresh_tasks
+      end
+    end
   end
 
   def destroy
     task.completions.find(params[:id]).destroy!
-    redirect_to list_path task.list
+    respond_to do |format|
+      format.html { redirect_to list_path task.list }
+      format.js do
+        @list = task.list
+        @grouped_tasks = @list.task_with_completions.grouped_by_completion
+        render :refresh_tasks
+      end
+    end
   end
 
   private
