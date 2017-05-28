@@ -4,12 +4,8 @@
   border-radius: 0;
 }
 
-.task__link {
-  color: $text;
-}
-
 .task--completed {
-  background-color: rgba($primary, 0.2);
+  background-color: rgba($primary, 0.1);
 }
 
 .task__actions {
