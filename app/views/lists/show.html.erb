@@ -10,4 +10,6 @@
   <%= render "tasks", grouped_tasks: @grouped_tasks, list: @list %>
 </div>
 
-<p><%= link_to "Add a task", new_list_task_path(@list) %></p>
+<hr>
+
+<p><%= link_to "Add a task", new_list_task_path(@list), remote: true %></p>

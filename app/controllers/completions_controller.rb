@@ -3,12 +3,13 @@ class CompletionsController < ApplicationController
 
   def create
     task.complete! current_user
+    flash[:success] = "Task completed!"
     respond_to do |format|
       format.html { redirect_to list_path task.list }
       format.js do
         @list = task.list
         @grouped_tasks = @list.task_with_completions.grouped_by_completion
-        render :refresh_tasks
+        render "tasks/refresh_tasks"
       end
     end
   end
@@ -20,7 +21,7 @@ class CompletionsController < ApplicationController
       format.js do
         @list = task.list
         @grouped_tasks = @list.task_with_completions.grouped_by_completion
-        render :refresh_tasks
+        render "tasks/refresh_tasks"
       end
     end
   end

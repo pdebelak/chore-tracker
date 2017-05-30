@@ -14,6 +14,7 @@ describe CompletionsController do
       completion = Completion.last
       expect(completion.user).to eq user
       expect(completion.task).to eq task
+      expect(flash[:success]).to be_present
       expect(response).to redirect_to list_path(list)
     end
 

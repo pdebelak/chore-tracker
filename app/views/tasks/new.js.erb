@@ -1,0 +1,10 @@
+<%= render "tasks/set_flashes" %>
+
+var existingBox = document.getElementById('task-new');
+var boxHTML = '<%= j render 'tasks/form', task: @task %>';
+if (existingBox) {
+  existingBox.innerHTML = boxHTML;
+} else {
+  var box = ChoreTracker.Bulma.createBox(boxHTML, 'task-new');
+  document.getElementById('tasks').appendChild(box);
+}

@@ -1,0 +1,8 @@
+var tasksContainer = document.getElementById('tasks');
+if (tasksContainer) {
+  tasksContainer.innerHTML = '<%= j render "lists/tasks", grouped_tasks: @grouped_tasks, list: @list %>';
+} else {
+  window.location.href = '<%= list_path @list %>';
+}
+
+<%= render "tasks/set_flashes" %>

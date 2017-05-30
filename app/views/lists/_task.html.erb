@@ -1,10 +1,10 @@
 <% TaskDecorator.new(task).tap do |decorated_task| %>
-  <section class="box <%= decorated_task.task_class %>">
+  <section id="task-<%= task.id %>" class="box <%= decorated_task.task_class %>">
     <div class="columns">
       <div class="column">
         <div class="columns">
           <div class="column">
-            <%= link_to task.description, list_task_path(list, task) %>
+            <%= link_to task.description, edit_list_task_path(list, task), remote: true %>
           </div>
           <div class="column">
             <strong>Schedule</strong>
