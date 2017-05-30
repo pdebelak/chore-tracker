@@ -19,4 +19,12 @@ class Task < ApplicationRecord
   def complete!(user)
     completions.create! user: user
   end
+
+  def with_completion
+    if persisted?
+      TaskWithCompletion.find(id)
+    else
+      TaskWithCompletion.new(attributes)
+    end
+  end
 end
