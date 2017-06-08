@@ -1,5 +1,7 @@
+<% remote ||= false %>
+
 <% TaskDecorator.new(task.with_completion).tap do |decorated_task| %>
-  <%= form_for [task.list, task], remote: true do |f| %>
+  <%= form_for [task.list, task], remote: remote do |f| %>
     <div class="columns task">
       <div class="column">
         <div class="columns task">
@@ -44,12 +46,12 @@
         </div>
         <% if task.persisted? %>
           <div>
-            <%= link_to "Delete", list_task_path(task.list, task), class: "button is-danger", method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
+            <%= link_to "Delete", list_task_path(task.list, task), class: "button is-danger", method: :delete, remote: remote, data: { confirm: "Are you sure?" } %>
             &nbsp;
           </div>
         <% end %>
         <div>
-          <%= link_to "Cancel", list_path(task.list), class: "button" %>
+          <%= link_to "Cancel", list_path(task.list), class: "button", remote: remote %>
           &nbsp;
         </div>
       </div>
