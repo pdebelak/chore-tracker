@@ -9,6 +9,10 @@ class ListsController < ApplicationController
     @list = find_list
     @grouped_tasks = @list.task_with_completions.grouped_by_completion
     @users = @list.users.except_user(current_user)
+    respond_to do |format|
+      format.html
+      format.js { render "tasks/refresh_tasks" }
+    end
   end
 
   def new
