@@ -1,7 +1,7 @@
 <%= render "tasks/set_flashes" %>
 
 var existingBox = document.getElementById('task-new');
-var boxHTML = '<%= j render 'tasks/form', task: @task %>';
+var boxHTML = '<%= j render 'tasks/form', task: @task, remote: true %>';
 if (existingBox) {
   existingBox.innerHTML = boxHTML;
 } else {

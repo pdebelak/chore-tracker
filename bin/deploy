@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bundle
+bundle install --without development test
 ./bin/rake tmp:clear
 ./bin/rails assets:precompile
 ./bin/rails db:migrate
